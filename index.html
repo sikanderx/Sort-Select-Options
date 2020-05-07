@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sort Select Options</title>
+</head>
+
+<body>
+	<select name="names" id="names">
+		<option value="Alex">Alex</option>
+		<option value="Akshay">Akshay</option>
+		<option value="Viraj">Viraj</option>
+		<option value="Alex">Alex</option>
+		<option value="Ram">Ram</option>
+		<option value="Kedar">Kedar</option>
+		<option value="Tushar">Tushar</option>
+		<option value="Kishor">Kishor</option>
+		<option value="Swanand">Swanand</option>
+	</select>
+	<br>
+	<button id="sort">SORT</button>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script>
+		$("#sort").click(function () {
+			sort_dropdown();
+		});
+		function sort_dropdown() {
+			var options = $('#names option');
+			var arr = options.map(function (i, v) {
+				return {
+					text: $(v).text(),
+					value: v.value
+				};
+			}).get();
+			arr.sort(function (v1, v2) {
+				return v1.text > v2.text ? 1 : v1.text < v2.text ? -1 : 0;
+			});
+			options.each(function (i, v) {
+				v.value = arr[i].value;
+				$(v).text(arr[i].text);
+			});
+		}
+	</script>
+</body>
+
+</html>
